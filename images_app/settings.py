@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -74,14 +76,25 @@ WSGI_APPLICATION = 'images_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import environ
+import os
+
+env = environ.Env(scheme=os.environ)
+try:
+    local = bool(env('LOCAL_SETTINGS'))
+    if local:
+        env.read_env()
+except:
+    pass
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'image_app_db',
-        'USER': 'django',
-        'PASSWORD': 'django',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME':     os.environ['DBNAME'], #env('DBNAME'), #'image_app_db',
+        'USER':     env('DBUSER'), #'django',
+        'PASSWORD': env('DBPASS'), #'django',
+        'HOST':     env('DBHOST'), #'localhost',
+        'PORT':     env('DBPORT'), #'5432',
     }
 }
 
