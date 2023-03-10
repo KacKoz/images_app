@@ -32,7 +32,7 @@ Only for authenticated users.
 POST data:
 ```
 {
-  "image": <image_file>
+    "image": <image_file>
 }
 ```
 ### `GET /api/images`
@@ -48,6 +48,14 @@ Only for authenticated users.
 
 POST data:
 ```
-"image": <image_id>,
-"expiring": <seconds_to_expire>
+{
+    "image": <image_id>,
+    "expiring": <seconds_to_expire>
+}
+```
+
+## Testing
+To run tests shell into web container and run:
+```
+python manage.py test
 ```
