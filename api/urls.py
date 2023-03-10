@@ -1,7 +1,8 @@
-from django.contrib import admin
-from django.urls import include, path
-from .views import UploadFile
+from django.urls import path
+from .views import Images, ImageUrl, ExpiringLink
 
 urlpatterns = [
-    path('image', UploadFile.as_view(), name='image'),
+    path('images', Images.as_view(), name='images'),
+    path('images/<str:url>', ImageUrl.as_view(), name="image_url"),
+    path('expiring', ExpiringLink.as_view(), name="expiring_link"),
 ]
